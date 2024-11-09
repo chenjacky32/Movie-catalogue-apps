@@ -12,6 +12,7 @@ export default [
       'no-undef': 'off',
       'linebreak-style': 'off',
       'no-unused-vars': 'off',
+      camelcase: 'off',
     },
   },
 ];
