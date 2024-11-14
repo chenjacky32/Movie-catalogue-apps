@@ -1,5 +1,5 @@
-import LikeButtonIntiator from '../src/scripts/utils/like-button-initiator';
 import FavouriteMovieIdb from '../src/scripts/data/favorite-movie-idb';
+import * as TestFactories from './helpers/testFactories';
 
 describe('Liking A Movie', () => {
   const addLikeButtonContainer = () => {
@@ -11,32 +11,19 @@ describe('Liking A Movie', () => {
   });
 
   it('should show the like button when the movie has not been liked before', async () => {
-    await LikeButtonIntiator.init({
-      likeButtonContainer: document.querySelector('#likeButtonContainer'),
-      movie: {
-        id: 1,
-      },
-    });
+    await TestFactories.createLikeButtonPresenterWithMovie({ id: 1 });
+
     expect(document.querySelector('[aria-label="like this movie"]')).toBeTruthy();
   });
 
   it('should not show the unlike button when the movie has not been liked before', async () => {
-    await LikeButtonIntiator.init({
-      likeButtonContainer: document.querySelector('#likeButtonContainer'),
-      movie: {
-        id: 1,
-      },
-    });
+    await TestFactories.createLikeButtonPresenterWithMovie({ id: 1 });
+
     expect(document.querySelector('[aria-label="unlike this movie"]')).toBeFalsy();
   });
 
   it('should be able to like the movie', async () => {
-    await LikeButtonIntiator.init({
-      likeButtonContainer: document.querySelector('#likeButtonContainer'),
-      movie: {
-        id: 1,
-      },
-    });
+    await TestFactories.createLikeButtonPresenterWithMovie({ id: 1 });
 
     document.querySelector('#likeButton').dispatchEvent(new Event('click'));
 
@@ -48,12 +35,7 @@ describe('Liking A Movie', () => {
   });
 
   it('should not add a movie again when its already liked', async () => {
-    await LikeButtonIntiator.init({
-      likeButtonContainer: document.querySelector('#likeButtonContainer'),
-      movie: {
-        id: 1,
-      },
-    });
+    await TestFactories.createLikeButtonPresenterWithMovie({ id: 1 });
 
     //tambahkan film dengan ID 1 ke daftar film favorite
     await FavouriteMovieIdb.putMovie({ id: 1 });
@@ -67,10 +49,7 @@ describe('Liking A Movie', () => {
   });
 
   it('should not add a movie when it has no id', async () => {
-    await LikeButtonIntiator.init({
-      likeButtonContainer: document.querySelector('#likeButtonContainer'),
-      movie: {},
-    });
+    await TestFactories.createLikeButtonPresenterWithMovie({});
     document.querySelector('#likeButton').dispatchEvent(new Event('click'));
     expect(await FavouriteMovieIdb.getAllMovies()).toEqual([]);
   });
