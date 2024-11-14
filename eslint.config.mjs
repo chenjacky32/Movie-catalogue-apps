@@ -13,6 +13,7 @@ export default [
       'linebreak-style': 'off',
       'no-unused-vars': 'off',
       camelcase: 'off',
+      'no-prototype-builtins': 'off',
     },
   },
 ];

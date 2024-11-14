@@ -11,6 +11,9 @@ const dbPromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
 
 const FavouriteMovieIdb = {
   async getMovie(id) {
+    if (!id) {
+      return;
+    }
     return (await dbPromise).get(OBJECT_STORE_NAME, id);
   },
 
@@ -19,6 +22,9 @@ const FavouriteMovieIdb = {
   },
 
   async putMovie(movie) {
+    if (!movie.hasOwnProperty('id')) {
+      return;
+    }
     return (await dbPromise).put(OBJECT_STORE_NAME, movie);
   },
 
