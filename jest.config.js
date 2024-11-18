@@ -5,7 +5,8 @@
 
 /** @type {import('jest').Config} */
 const config = {
-  setupFiles: ['fake-indexeddb/auto'],
+  testMatch: ['**/tests/**/*.test.[jt]s?(x)'],
+  setupFiles: ['fake-indexeddb/auto', 'dotenv/config'],
   testEnvironment: 'jest-environment-jsdom',
   transform: {
     '^.+\\.(js|ts)$': 'babel-jest',
